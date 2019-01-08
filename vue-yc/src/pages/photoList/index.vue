@@ -13,9 +13,13 @@
     <img class="preview-img" :key="item.src" v-for="(item, index) in list" :src="item.src" height="100" @click="$preview.open(index, list)">
 
     <ul>
-      <li class="img-container" v-for="item in images" :key="item.id">
-        <img v-lazy="item">
-      </li>
+      <router-link class="img-container" v-for="item in images" :key="item.id" :to="'/home/photoInfo/'+item.id">
+        <img v-lazy="item.img_url">
+        <div class="info">
+          <h1 class="info-title">{{ item.title }}</h1>
+          <div class="info-body">{{ item.zhaiyao }}</div>
+        </div>
+      </router-link>
     </ul>
   </div>
 </template>
@@ -31,26 +35,9 @@ export default {
     return {
       categories: [],
       images: [
-        "http://img0.imgtn.bdimg.com/it/u=1886777974,634529426&fm=200&gp=0.jpg",
-        "http://g.hiphotos.baidu.com/image/pic/item/2e2eb9389b504fc27b7148cfefdde71191ef6dca.jpg",
-        "http://a.hiphotos.baidu.com/image/pic/item/279759ee3d6d55fbba3e616666224f4a21a4ddf1.jpg"
+        
       ],
-      list: [{
-          src: "http://img0.imgtn.bdimg.com/it/u=1886777974,634529426&fm=200&gp=0.jpg",
-          w: 600,
-          title: 'Image Caption 1',
-          h: 400
-        }, {
-          src: "http://g.hiphotos.baidu.com/image/pic/item/2e2eb9389b504fc27b7148cfefdde71191ef6dca.jpg",
-          w: 1200,
-          title: 'Image Caption 1',
-          h: 900
-        }, {
-          src: "http://a.hiphotos.baidu.com/image/pic/item/279759ee3d6d55fbba3e616666224f4a21a4ddf1.jpg",
-          w: 1200,
-          title: 'Image Caption 1',
-          h: 900
-        }]
+      list: []
     };
   },
   methods: {
@@ -77,7 +64,7 @@ export default {
   },
   created() {
     this.getCategory();
-    // this.getImages(0);
+    this.getImages(0);
   },
   mounted() {
     // 初始化区域滚动一定要放在mounted钩子函数中
@@ -90,6 +77,9 @@ export default {
 </script>
 
 <style lang="less">
+*{
+  touch-action: pan-y
+}
 .img-container {
   width: 100%;
   min-height: 300px;
@@ -105,7 +95,7 @@ img[lazy="loading"] {
 
 img[lazy="error"] {
   width: 100%;
-  // height: 300px;
+  //height: 300px;
   // background-color: red;
 }
 </style>

@@ -9,6 +9,7 @@ import newsListComponent from '../pages/newsList/'
 import newsInfoComponent from '../pages/newsInfo/'
 import photoListComponent from '../pages/photoList/'
 import goodsListComponent from '../pages/goodsList/'
+import photoInfoComponent from '../pages/photoInfo/'
 
 
 
@@ -25,6 +26,7 @@ const router = new Router({
     { path: '/home/newsInfo/:id', component: newsInfoComponent },
     { path: '/home/photoList', component: photoListComponent },
     { path: '/home/goodsList', component: goodsListComponent },
+    { path: '/home/photoInfo/:id', component: photoInfoComponent },
   ],
   linkActiveClass: 'mui-active'
 })
